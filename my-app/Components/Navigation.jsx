@@ -7,12 +7,16 @@ import MenuItem from "@mui/material/MenuItem";
 export default function Navigation() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const LoggedIn = false;
 
   return (
     <div style={{ background: "black", color: "white" }}>
@@ -34,9 +38,18 @@ export default function Navigation() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        {LoggedIn ? (
+          <>
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
+          </>
+        ) : (
+          <>
+            <MenuItem onClick={handleClose}>Log In</MenuItem>
+            <MenuItem onClick={handleClose}>Sign Up</MenuItem>
+          </>
+        )}
       </Menu>
     </div>
   );
