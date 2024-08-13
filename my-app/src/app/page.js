@@ -8,7 +8,9 @@ export default function page() {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await fetch(`http://localhost:3000/api/secondroute`);
+        const response = await fetch(
+          `http://localhost:3000/api/topgainloseactive`
+        );
 
         if (!response.ok) {
           throw new Error("failed to get data");
