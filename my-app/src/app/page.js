@@ -1,9 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function page() {
   const [topLosers, setTopLosers] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [ticker, setTicker] = useState("");
+
+  const router = useRouter();
 
   useEffect(() => {
     async function getData() {
@@ -32,6 +36,12 @@ export default function page() {
     return <div>Loading...</div>;
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    router.push(`http://localhost:3000/tickerbyid/${ticker}`);
+    setTicker("");
+  };
+
   return (
     <>
       <h2>Here are the top losers:</h2>
@@ -45,6 +55,16 @@ export default function page() {
           </div>
         ))}
       </>
+      <div>Get Info By Ticker ID</div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={ticker}
+          placeholder="Enter Ticker"
+          onChange={(event) => setTicker(event.target.value)}
+        />
+        <input type="submit" placeholder="Submit" />
+      </form>
     </>
   );
 }
