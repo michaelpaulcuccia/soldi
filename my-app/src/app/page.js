@@ -13,7 +13,7 @@ export default function page() {
     async function getData() {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/topgainloseactive`
+          `${process.env.NEXT_PUBLIC_API_DOMAIN}/topgainloseactive`
         );
 
         if (!response.ok) {
@@ -38,7 +38,7 @@ export default function page() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    router.push(`http://localhost:3000/tickerbyid/${ticker}`);
+    router.push(`${process.env.NEXT_PUBLIC_DOMAIN}/tickerbyid/${ticker}`);
     setTicker("");
   };
 

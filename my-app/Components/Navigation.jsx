@@ -39,16 +39,16 @@ export default function Navigation() {
         }}
       >
         {LoggedIn ? (
-          <>
+          <div>
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem onClick={handleClose}>Logout</MenuItem>
-          </>
+          </div>
         ) : (
-          <>
+          <div>
             <MenuItem onClick={handleClose}>Log In</MenuItem>
             <MenuItem onClick={handleClose}>Sign Up</MenuItem>
-          </>
+          </div>
         )}
       </Menu>
     </div>

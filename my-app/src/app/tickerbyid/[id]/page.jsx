@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 export default function page() {
   const { id } = useParams();
   const [data, setData] = useState(null);
+  const [noData, setNoData] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -12,9 +13,14 @@ export default function page() {
       if (!id) return;
       try {
         const item = await fetchByTicker(id);
-        setData(item);
+        const isDataEmpty = (await item) && Object.keys(item).length === 0;
+        if (isDataEmpty) {
+          setNoData(`${id} not found`);
+        } else {
+          setData(item);
+        }
       } catch (error) {
-        console.error("error fetching");
+        console.error("Error Fetching");
       } finally {
         setLoading(false);
       }
@@ -25,11 +31,10 @@ export default function page() {
     }
   }, [id]);
 
-  //TODO: move to a separate directory
   async function fetchByTicker(id) {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/companyoverview/${id}`
+        `${process.env.NEXT_PUBLIC_API_DOMAIN}/companyoverview/${id}`
       );
 
       if (!res.ok) {
@@ -43,15 +48,15 @@ export default function page() {
     }
   }
 
-  if (!data && !loading) {
-    return <h1>data Not Found</h1>;
+  if (loading) {
+    return <h1>Loading...</h1>;
   }
-
-  console.log(data);
 
   return (
     <>
-      {data && (
+      {!data ? (
+        <div>No data found using {id}.</div>
+      ) : (
         <div>
           <div>{data.Symbol}</div>
           <div>{data.Name}</div>
