@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import StyledComponentsRegistry from "../app/lib/registry";
 import Container from "@mui/material/Container";
 import UtilBar from "../../Components/UtilBar";
 import MainNav from "../../Components/MainNav";
@@ -15,11 +16,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Container maxWidth="xl">
-          <UtilBar />
-          <MainNav />
-          {children}
-        </Container>
+        <StyledComponentsRegistry>
+          {" "}
+          <Container maxWidth="xl">
+            <UtilBar />
+            <MainNav />
+            {children}
+          </Container>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
