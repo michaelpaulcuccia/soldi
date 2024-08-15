@@ -1,3 +1,6 @@
+"use client";
+//import { usePathname } from "next/navigation";
+import useHideHero from "../../hooks/useHider";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import StyledComponentsRegistry from "../app/lib/registry";
@@ -10,6 +13,8 @@ import HeroImage from "../../Components/HeroImage";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
+  const showHero = useHideHero();
+
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -21,13 +26,15 @@ export default function RootLayout({ children }) {
           <Container maxWidth="xl">
             <MainNav />
           </Container>
-          <FullBleedContainer bg="dark" bgShouldChangeMobile="yes">
-            <HeroImage
-              bgimage="/images/hero-finance-1.jpg"
-              headline="Stay Ahead with Real-Time Market Insights"
-              subtext="Track stocks, bonds, and market trends with up-to-date data"
-            />
-          </FullBleedContainer>
+          {showHero && (
+            <FullBleedContainer bg="dark" bgShouldChangeMobile="yes">
+              <HeroImage
+                bgimage="/images/hero-finance-1.jpg"
+                headline="Stay Ahead with Real-Time Market Insights"
+                subtext="Track stocks, bonds, and market trends with up-to-date data"
+              />
+            </FullBleedContainer>
+          )}
           <Container maxWidth="xl">{children}</Container>
         </StyledComponentsRegistry>
       </body>
