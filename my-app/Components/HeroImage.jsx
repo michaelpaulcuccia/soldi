@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import styled from "styled-components";
 import { Anton } from "next/font/google";
@@ -20,7 +21,14 @@ const Root = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    //background: rgba(0, 0, 0, 0.4);
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.4) 10%,
+      rgba(0, 0, 0, 0) 30%,
+      rgba(0, 0, 0, 0.4) 70%,
+      rgba(0, 0, 0, 0.4) 90%
+    );
     z-index: 0;
   }
 
