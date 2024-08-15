@@ -1,7 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Container from "@mui/material/Container";
-import Navigation from "../../Components/Navigation";
+import UtilBar from "../../Components/UtilBar";
+import MainNav from "../../Components/MainNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Container maxWidth="xl">
-          <Navigation />
+          <UtilBar />
+          <MainNav />
           {children}
         </Container>
       </body>

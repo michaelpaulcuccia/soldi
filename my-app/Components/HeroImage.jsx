@@ -8,12 +8,21 @@ const anton = Anton({ subsets: ["latin"], weight: ["400"] });
 const Root = styled.div`
   position: relative;
   width: 100%;
-  height: 800px; /* Adjust For Mobile */
-  background: url(${(props) => props.bgImage}) no-repeat center center;
+  height: 700px;
+  background: url(${(props) => props.bgimage}) no-repeat center center;
   background-size: cover;
   display: flex;
-  //align-items: center;
-  //justify-content: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+  }
 
   @media (max-width: ${mobileBreakpoint}) {
     height: 210px;
@@ -24,11 +33,8 @@ const HeroText = styled.div`
   position: absolute;
   z-index: 1;
   color: white;
-  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding: 20px;
 
   @media (max-width: ${mobileBreakpoint}) {
@@ -40,6 +46,17 @@ const HeroText = styled.div`
     line-height: 67px;
     letter-spacing: 0.75px;
     text-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    max-width: 700px;
+  }
+
+  p {
+    font-size: 43px;
+    line-height: 47px;
+    letter-spacing: 0.5px;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin-top: 18px;
   }
 `;
 
@@ -50,26 +67,38 @@ const MobileHeroText = styled.div`
     display: flex;
     flex-direction: column;
     text-align: left;
-    //align-items: center;
-    //justify-content: center;
-    color: black;
+    margin: 22px 0;
+    color: rgb(35, 35, 35);
   }
 
   span {
     font-size: 33px;
     line-height: 37px;
     letter-spacing: 0.25px;
-    text-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  p {
+    font-size: 23px;
+    line-height: 27px;
+    letter-spacing: 0.5px;
+
+    margin-top: 8px;
   }
 `;
 
-export default function HeroImage({ bgImage, children }) {
+export default function HeroImage({ bgimage, headline, subtext }) {
   return (
     <>
-      <Root bgImage={bgImage}>
-        <HeroText className={anton.className}>{children}</HeroText>
+      <Root bgimage={bgimage}>
+        <HeroText className={anton.className}>
+          <span>{headline}</span>
+          <p>{subtext}</p>
+        </HeroText>
       </Root>
-      <MobileHeroText className={anton.className}>{children}</MobileHeroText>
+      <MobileHeroText className={anton.className}>
+        <span>{headline}</span>
+        <p>{subtext}</p>
+      </MobileHeroText>
     </>
   );
 }
