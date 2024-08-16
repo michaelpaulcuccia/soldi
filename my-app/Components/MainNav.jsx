@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 import { mobileBreakpoint } from "../constants";
 import { RiLoginCircleLine } from "react-icons/ri";
 import { GiGears } from "react-icons/gi";
@@ -41,17 +42,19 @@ const ResourceContainer = styled.div`
 export default function SecondaryNav() {
   return (
     <Root>
-      <LogoContainer>
-        <Image
-          src="/images/logo.svg"
-          className="responsive-image"
-          height={100}
-          width={100}
-          alt="logo"
-        />
-        <div>Pelosi Stock Management</div>
-        <small>Economic Advisory. Fiscal Planning.</small>
-      </LogoContainer>
+      <Link href="/">
+        <LogoContainer>
+          <Image
+            src="/images/logo.svg"
+            className="responsive-image"
+            height={100}
+            width={100}
+            alt="logo"
+          />
+          <div>Pelosi Stock Management</div>
+          <small>Economic Advisory. Fiscal Planning.</small>
+        </LogoContainer>
+      </Link>
       <ResourceContainer>
         <div>
           <RiLoginCircleLine />

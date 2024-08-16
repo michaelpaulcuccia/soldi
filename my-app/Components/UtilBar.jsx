@@ -49,9 +49,11 @@ export default function UtilBar() {
     <>
       <DesktopRoot className={alumni.className}>
         <StyledLink href="/planning">Planning</StyledLink>
-        <StyledLink href="/">Advisory</StyledLink>
-        <StyledLink href="/">Individuals and Families</StyledLink>
-        <StyledLink href="/">Business</StyledLink>
+        <StyledLink href="/advisory">Advisory</StyledLink>
+        <StyledLink href="/individualsandfamilies">
+          Individuals and Families
+        </StyledLink>
+        <StyledLink href="/business">Business</StyledLink>
         <StyledLink href="/">Our Company</StyledLink>
         <StyledLink href="/">Support</StyledLink>
       </DesktopRoot>

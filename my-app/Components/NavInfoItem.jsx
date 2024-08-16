@@ -46,10 +46,15 @@ export default function NavInfoItem({ statement, image, companyStatement }) {
   const pathname = usePathname();
 
   const transformString = (str) => {
-    const withoutSlash = str.startsWith("/") ? str.slice(1) : str;
-    const capitalized =
-      withoutSlash.charAt(0).toUpperCase() + withoutSlash.slice(1);
-    return capitalized;
+    if (str === "/individualsandfamilies") {
+      const individualsAndFamilies = "Individuals and Families";
+      return individualsAndFamilies;
+    } else {
+      const withoutSlash = str.startsWith("/") ? str.slice(1) : str;
+      const capitalized =
+        withoutSlash.charAt(0).toUpperCase() + withoutSlash.slice(1);
+      return capitalized;
+    }
   };
 
   const formattedPathName = transformString(pathname);
