@@ -1,8 +1,15 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { mobileBreakpoint } from "../constants";
+import { Alumni_Sans } from "next/font/google";
+
+const alumni = Alumni_Sans({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 const DesktopRoot = styled.div`
   display: flex;
@@ -15,6 +22,15 @@ const DesktopRoot = styled.div`
 
   @media (max-width: ${mobileBreakpoint}) {
     display: none;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  font-size: 22px;
+  letter-spacing: 0.75px;
+
+  &:hover {
+    font-weight: bold;
   }
 `;
 
@@ -31,13 +47,13 @@ const MobileRoot = styled.div`
 export default function UtilBar() {
   return (
     <>
-      <DesktopRoot>
-        <div>Planning</div>
-        <div>Advisory</div>
-        <div>Individuals and Families</div>
-        <div>Business</div>
-        <div>Our Company</div>
-        <div>Support</div>
+      <DesktopRoot className={alumni.className}>
+        <StyledLink href="/planning">Planning</StyledLink>
+        <StyledLink href="/">Advisory</StyledLink>
+        <StyledLink href="/">Individuals and Families</StyledLink>
+        <StyledLink href="/">Business</StyledLink>
+        <StyledLink href="/">Our Company</StyledLink>
+        <StyledLink href="/">Support</StyledLink>
       </DesktopRoot>
       <MobileRoot>
         <RxHamburgerMenu color="white" fontSize={32} />

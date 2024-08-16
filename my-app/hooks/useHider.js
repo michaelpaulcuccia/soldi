@@ -1,14 +1,11 @@
 import { usePathname } from "next/navigation";
+import { hideHeroPaths } from "../constants";
 
 const useHideHero = () => {
   const pathname = usePathname();
 
-  // Define paths where the header should not be shown
-  //TO DO - make this a const
-  const hideHeaderPaths = ["/testpage"];
-
-  // Return true if the header should be hidden
-  return !hideHeaderPaths.includes(pathname);
+  // Returns true if the hero should be hidden
+  return !hideHeroPaths.includes(pathname);
 };
 
 export default useHideHero;
