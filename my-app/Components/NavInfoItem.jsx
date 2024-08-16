@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import styled from "styled-components";
 import { Alumni_Sans } from "next/font/google";
+import { mobileBreakpoint } from "../constants";
 
 const alumni = Alumni_Sans({
   subsets: ["latin"],
@@ -15,11 +16,6 @@ const Root = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: 64px; //TO DO - remove eventually
-`;
-
-const Line = styled.div`
-  border-top: 1px solid black;
-  margin: 8px 0px 32px 0px;
 `;
 
 const PageName = styled.div`
@@ -35,11 +31,16 @@ const StatementContainer = styled.div`
   font-size: 35px;
   line-heigth: 35px;
   font-weight: 400;
-  align-self: flex-start;
-  background: #eee;
+  background: white;
   border-radius: 16px;
-  padding: 12px 18px;
+  padding: 32px 24px;
   margin-top: 32px;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    text-align: center;
+    font-weight: 500;
+    padding: 18px 12px;
+  }
 `;
 
 export default function NavInfoItem({ statement, image, companyStatement }) {
@@ -62,7 +63,6 @@ export default function NavInfoItem({ statement, image, companyStatement }) {
   return (
     <>
       <Root className={alumni.className}>
-        <Line />
         <PageName>{formattedPathName}</PageName>
         <Image
           src={image}

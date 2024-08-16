@@ -13,6 +13,8 @@ const Root = styled.div`
   justify-content: space-between;
   padding: 8px 0px;
   width: 100%;
+  border-bottom: 1px solid black;
+  margin-bottom: 18px;
 `;
 
 const LogoContainer = styled.div`
