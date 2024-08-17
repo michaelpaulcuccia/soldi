@@ -66,6 +66,11 @@ export default function PerformersTable({ item }) {
                   component="th"
                   scope="row"
                   onClick={() => handleSubmit(field.ticker)}
+                  style={{
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                    color: "blue",
+                  }}
                 >
                   {field.ticker}
                 </StyledTableCell>

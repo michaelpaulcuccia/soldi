@@ -49,8 +49,8 @@ export default function SecondaryNav() {
           <Image
             src="/images/logo.svg"
             className="responsive-image"
-            height={100}
-            width={100}
+            height={70}
+            width={70}
             alt="logo"
           />
           <div>Pelosi Stock Management</div>
@@ -58,14 +58,18 @@ export default function SecondaryNav() {
         </LogoContainer>
       </Link>
       <ResourceContainer>
-        <div>
-          <RiLoginCircleLine />
-          Login
-        </div>
-        <div>
-          <GiGears />
-          Demo
-        </div>
+        <Link href="/comingsoon">
+          <div>
+            <RiLoginCircleLine />
+            Login
+          </div>
+        </Link>
+        <Link href="/comingsoon">
+          <div>
+            <GiGears />
+            Demo
+          </div>
+        </Link>
       </ResourceContainer>
     </Root>
   );

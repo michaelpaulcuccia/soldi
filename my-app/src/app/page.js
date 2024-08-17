@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import { Alumni_Sans } from "next/font/google";
 import PerformersTable from "../../Components/PerformersTable";
@@ -39,9 +39,9 @@ export default function page() {
   const [topGainers, setTopGainers] = useState(null);
   const [mostActive, setMostActive] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [ticker, setTicker] = useState("");
+  //const [ticker, setTicker] = useState("");
 
-  const router = useRouter();
+  //const router = useRouter();
 
   useEffect(() => {
     async function getData() {
@@ -54,7 +54,6 @@ export default function page() {
           throw new Error("failed to get data");
         }
         const result = await response.json();
-        console.log(result);
 
         setTopGainers(result.top_gainers);
         setTopLosers(result.top_losers);
@@ -73,11 +72,11 @@ export default function page() {
     return <div>Loading...</div>;
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    router.push(`${process.env.NEXT_PUBLIC_DOMAIN}/tickerbyid/${ticker}`);
-    setTicker("");
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   router.push(`${process.env.NEXT_PUBLIC_DOMAIN}/tickerbyid/${ticker}`);
+  //   setTicker("");
+  // };
 
   const d = new Date();
   const options = {
@@ -119,7 +118,7 @@ export default function page() {
         <small>* check back every 15 minutes to ensure real-time update</small>
       </TextContainer>
       <PerformersTable item={mostActive} />
-      <br />
+      {/* <br />
       <br />
       <br />
       <div>experimental form</div>
@@ -133,7 +132,7 @@ export default function page() {
           onChange={(event) => setTicker(event.target.value)}
         />
         <input type="submit" placeholder="Submit" />
-      </form>
+      </form> */}
     </>
   );
 }

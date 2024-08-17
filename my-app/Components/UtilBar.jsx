@@ -74,7 +74,6 @@ export default function UtilBar() {
 
   const handleClick = () => {
     setShowMobileMenu(!showMobileMenu);
-    console.log("click");
   };
   return (
     <>
@@ -85,8 +84,8 @@ export default function UtilBar() {
           Individuals and Families
         </StyledLink>
         <StyledLink href="/business">Business</StyledLink>
-        <StyledLink href="/">Our Company</StyledLink>
-        <StyledLink href="/">Support</StyledLink>
+        <StyledLink href="/comingsoon">Our Company</StyledLink>
+        <StyledLink href="/comingsoon">Support</StyledLink>
       </DesktopRoot>
       <MobileRoot>
         <RxHamburgerMenu onClick={handleClick} color="white" fontSize={32} />
@@ -99,8 +98,8 @@ export default function UtilBar() {
               Individuals and Families
             </StyledLink>
             <StyledLink href="/business">Business</StyledLink>
-            <StyledLink href="/">Our Company</StyledLink>
-            <StyledLink href="/">Support</StyledLink>
+            <StyledLink href="/comingsoon">Our Company</StyledLink>
+            <StyledLink href="/comingsoon">Support</StyledLink>
           </MobileMenu>
         )}
       </MobileRoot>

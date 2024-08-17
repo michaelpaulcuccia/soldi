@@ -20,8 +20,6 @@ export default function FullBleedContainer({
   bg,
   bgShouldChangeMobile,
 }) {
-  console.log(bg); // Debugging line to check the bg prop
-
   return (
     <Root bg={bg} bgShouldChangeMobile={bgShouldChangeMobile}>
       {" "}

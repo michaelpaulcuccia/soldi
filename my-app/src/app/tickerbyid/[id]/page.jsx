@@ -17,6 +17,7 @@ export default function page() {
         if (isDataEmpty) {
           setNoData(`${id} not found`);
         } else {
+          console.log(item);
           setData(item);
         }
       } catch (error) {
@@ -60,7 +61,10 @@ export default function page() {
         <div>
           <div>{data.Symbol}</div>
           <div>{data.Name}</div>
-          <div>{data.Country}</div>
+          <div>{data.description}</div>
+          <div>
+            {data.Name} exhanges on {data.Exchange} using {data.Currency}
+          </div>
         </div>
       )}
     </>
