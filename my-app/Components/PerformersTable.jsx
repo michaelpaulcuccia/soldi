@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { useRouter } from "next/navigation";
 import styled2 from "styled-components";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -39,6 +40,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function PerformersTable({ item }) {
+  const router = useRouter();
+
+  const handleSubmit = (arg) => {
+    router.push(`${process.env.NEXT_PUBLIC_DOMAIN}/tickerbyid/${arg}`);
+  };
+
   return (
     <ComponentWrapper>
       <TableContainer component={Paper}>
@@ -55,7 +62,11 @@ export default function PerformersTable({ item }) {
           <TableBody>
             {item.map((field, i) => (
               <StyledTableRow key={i}>
-                <StyledTableCell component="th" scope="row">
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  onClick={() => handleSubmit(field.ticker)}
+                >
                   {field.ticker}
                 </StyledTableCell>
                 <StyledTableCell align="right">{field.price}</StyledTableCell>
