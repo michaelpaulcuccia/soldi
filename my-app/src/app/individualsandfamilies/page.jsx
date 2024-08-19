@@ -1,5 +1,5 @@
 import React from "react";
-import NavInfoItem from "../../../Components/NavInfoItem";
+import NavInfoItem from "../../../components/NavInfoItem";
 import { INDIVIDUALS_AND_FAMILIES } from "../../../constants";
 
 export default function page() {

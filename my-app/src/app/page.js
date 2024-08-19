@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 //import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import { Alumni_Sans } from "next/font/google";
-import PerformersTable from "../../Components/PerformersTable";
+import PerformersTable from "../../components/PerformersTable";
 import { mobileBreakpoint } from "../../constants";
 
 const alumni = Alumni_Sans({

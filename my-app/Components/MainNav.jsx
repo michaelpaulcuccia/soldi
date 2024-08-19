@@ -53,7 +53,7 @@ export default function SecondaryNav() {
             width={70}
             alt="logo"
           />
-          <div>Pelosi Stock Management</div>
+          <div>Cuccia Stock Management</div>
           <small>Economic Advisory. Fiscal Planning.</small>
         </LogoContainer>
       </Link>
