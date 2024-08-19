@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 
 export default function page() {
   const { id } = useParams();
-  const [data, setData] = useState(null);
+  const [overviewData, setOverviewData] = useState(null);
   const [noData, setNoData] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -13,12 +13,12 @@ export default function page() {
       if (!id) return;
       try {
         const item = await fetchByTicker(id);
-        const isDataEmpty = (await item) && Object.keys(item).length === 0;
+        const isDataEmpty = item && Object.keys(item).length === 0;
+        console.log(item.overviewJSON);
         if (isDataEmpty) {
           setNoData(`${id} not found`);
         } else {
-          console.log(item);
-          setData(item);
+          setOverviewData(item.overviewJSON);
         }
       } catch (error) {
         console.error("Error Fetching");
@@ -27,22 +27,38 @@ export default function page() {
       }
     };
 
-    if (data === null) {
+    if (overviewData === null) {
       getData();
     }
   }, [id]);
 
   async function fetchByTicker(id) {
     try {
-      const res = await fetch(
+      const overviewRes = await fetch(
         `${process.env.NEXT_PUBLIC_API_DOMAIN}/companyoverview/${id}`
       );
 
-      if (!res.ok) {
-        throw new Error("Failed to fetch data");
+      const newsAndSentimentRes = await fetch(
+        `${process.env.NEXT_PUBLIC_API_DOMAIN}/marketnewsandsentiment/${id}`
+      );
+
+      if (!overviewRes.ok) {
+        throw new Error("Failed to fetch overview data");
       }
 
-      return res.json();
+      if (!newsAndSentimentRes.ok) {
+        throw new Error("Failed to fetch news and sentiment data");
+      }
+
+      const newsJSON = await newsAndSentimentRes.json();
+
+      const overviewJSON = await overviewRes.json();
+
+      //return overviewRes.json();
+      return {
+        overviewJSON,
+        newsJSON,
+      };
     } catch (error) {
       console.log(error);
       return null;
@@ -55,15 +71,16 @@ export default function page() {
 
   return (
     <>
-      {!data ? (
+      {!overviewData ? (
         <div>No data found using {id}.</div>
       ) : (
         <div>
-          <div>{data.Symbol}</div>
-          <div>{data.Name}</div>
-          <div>{data.description}</div>
+          <div>{overviewData.Symbol}</div>
+          <div>{overviewData.Name}</div>
+          <div>{overviewData.description}</div>
           <div>
-            {data.Name} exhanges on {data.Exchange} using {data.Currency}
+            {overviewData.Name} exhanges on {overviewData.Exchange} using{" "}
+            {overviewData.Currency}
           </div>
         </div>
       )}
