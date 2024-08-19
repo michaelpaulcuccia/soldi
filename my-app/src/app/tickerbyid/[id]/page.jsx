@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { fetchByTicker } from "../../../../utils";
 
 export default function page() {
   const { id } = useParams();
   const [overviewData, setOverviewData] = useState(null);
-  const [noData, setNoData] = useState("");
+  const [newsData, setNewsData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,13 +14,8 @@ export default function page() {
       if (!id) return;
       try {
         const item = await fetchByTicker(id);
-        const isDataEmpty = item && Object.keys(item).length === 0;
-        console.log(item.overviewJSON);
-        if (isDataEmpty) {
-          setNoData(`${id} not found`);
-        } else {
-          setOverviewData(item.overviewJSON);
-        }
+        setOverviewData(item.overviewJSON);
+        setNewsData(item.newsJSON);
       } catch (error) {
         console.error("Error Fetching");
       } finally {
@@ -31,39 +27,6 @@ export default function page() {
       getData();
     }
   }, [id]);
-
-  async function fetchByTicker(id) {
-    try {
-      const overviewRes = await fetch(
-        `${process.env.NEXT_PUBLIC_API_DOMAIN}/companyoverview/${id}`
-      );
-
-      const newsAndSentimentRes = await fetch(
-        `${process.env.NEXT_PUBLIC_API_DOMAIN}/marketnewsandsentiment/${id}`
-      );
-
-      if (!overviewRes.ok) {
-        throw new Error("Failed to fetch overview data");
-      }
-
-      if (!newsAndSentimentRes.ok) {
-        throw new Error("Failed to fetch news and sentiment data");
-      }
-
-      const newsJSON = await newsAndSentimentRes.json();
-
-      const overviewJSON = await overviewRes.json();
-
-      //return overviewRes.json();
-      return {
-        overviewJSON,
-        newsJSON,
-      };
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  }
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -78,9 +41,23 @@ export default function page() {
           <div>{overviewData.Symbol}</div>
           <div>{overviewData.Name}</div>
           <div>{overviewData.description}</div>
+          {/* NEEDS CONDITIONAL - try 'EJH' ticker */}
           <div>
             {overviewData.Name} exhanges on {overviewData.Exchange} using{" "}
             {overviewData.Currency}
+          </div>
+        </div>
+      )}
+      {newsData.Information ? (
+        <div>No news found using {id}.</div>
+      ) : (
+        <div>
+          <div>
+            {newsData.items === 0 ? (
+              <span>No articles found</span>
+            ) : (
+              <span>{newsData.items} articles found</span>
+            )}
           </div>
         </div>
       )}
