@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { fetchByTicker } from "../../../../utils";
+import { SymbolText, StockText } from "../../../../components/TickerByIDText";
 
 export default function page() {
   const { id } = useParams();
@@ -14,8 +15,10 @@ export default function page() {
       if (!id) return;
       try {
         const item = await fetchByTicker(id);
-        setOverviewData(item.overviewJSON);
-        setNewsData(item.newsJSON);
+        console.log(item);
+        const { overviewJSON, newsJSON } = item;
+        setOverviewData(overviewJSON);
+        setNewsData(newsJSON);
       } catch (error) {
         console.error("Error Fetching");
       } finally {
@@ -32,20 +35,26 @@ export default function page() {
     return <h1>Loading...</h1>;
   }
 
+  console.log(overviewData);
+  console.log(newsData);
+
   return (
     <>
-      {!overviewData ? (
+      {overviewData.Information ? (
         <div>No data found using {id}.</div>
       ) : (
         <div>
-          <div>{overviewData.Symbol}</div>
-          <div>{overviewData.Name}</div>
-          <div>{overviewData.description}</div>
-          {/* NEEDS CONDITIONAL - try 'EJH' ticker */}
-          <div>
+          <SymbolText>
+            {overviewData.Symbol ? overviewData.Symbol : { id }}
+          </SymbolText>
+          <StockText>
+            {overviewData.Name}, {overviewData.Address}
+          </StockText>
+          <StockText>{overviewData.Description}</StockText>
+          <StockText>
             {overviewData.Name} exhanges on {overviewData.Exchange} using{" "}
             {overviewData.Currency}
-          </div>
+          </StockText>
         </div>
       )}
       {newsData.Information ? (
@@ -61,6 +70,7 @@ export default function page() {
           </div>
         </div>
       )}
+      {/* NEWSDATA ITEMS IN ARRAY.feed title/url  */}
     </>
   );
 }
