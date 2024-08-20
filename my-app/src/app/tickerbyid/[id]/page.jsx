@@ -80,7 +80,7 @@ export default function page() {
           </div>
         </div>
       )}
-      {/* NEWSDATA ITEMS IN ARRAY.feed title/url  */}
+      {/* category_within_source, overall_sentiment_label  */}
       <div>
         {newsFeed !== null ? (
           newsFeed.map((article, index) => (
