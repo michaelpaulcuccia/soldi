@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { fetchByTicker } from "../../../../utils";
-import { SymbolText, StockText } from "../../../../components/TickerByIDText";
+import { SymbolText, StockText } from "../../../../Components/TickerByIDText";
 
 export default function page() {
   const { id } = useParams();
