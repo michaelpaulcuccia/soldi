@@ -5,7 +5,6 @@ import StyledComponentsRegistry from "../app/lib/registry";
 import Container from "@mui/material/Container";
 import useHideHero from "../../hooks/useHider";
 import FullBleedContainer from "../../Components/FullBleedContainer";
-import FullBleedContainer from "../../Components/FullBleedContainer";
 import UtilBar from "../../Components/UtilBar";
 import MainNav from "../../Components/MainNav";
 import HeroImage from "../../Components/HeroImage";
