@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { fetchByTicker } from "../../../../utils";
 import { SymbolText, StockText } from "../../../../Components/TickerByIDText";
+import MyLineChart from "../../../../Components/MyLineChart";
 
 export default function page() {
   const { id } = useParams();
@@ -27,7 +28,8 @@ export default function page() {
         setNewsFeed(limitedNewsFeed);
         setOverviewData(overviewJSON);
         setNewsData(newsJSON);
-        setEarningsData(earningsJSON);
+        const { annualEarnings } = earningsJSON;
+        setEarningsData(annualEarnings);
       } catch (error) {
         console.error("Error Fetching");
         setOverviewApiError(!overviewApiError);
@@ -105,6 +107,8 @@ export default function page() {
           <div>No news articles found</div>
         )}
       </div>
+
+      <MyLineChart data={earningsData} />
     </>
   );
 }
