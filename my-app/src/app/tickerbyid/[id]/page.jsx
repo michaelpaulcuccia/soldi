@@ -8,27 +8,31 @@ import { SymbolText, StockText } from "../../../../Components/TickerByIDText";
 export default function page() {
   const { id } = useParams();
   const [overviewData, setOverviewData] = useState(null);
-  const [newsData, setNewsData] = useState(null);
-  const [newsFeed, setNewsFeed] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [overviewApiError, setOverviewApiError] = useState(false);
-  const [newsApiError, setNewsApiError] = useState(false);
+  const [newsData, setNewsData] = useState(null);
+  const [newsDataApiError, setNewsDataApiError] = useState(false);
+  const [newsFeed, setNewsFeed] = useState(null);
+  const [earningsData, setEarningsData] = useState(null);
+  const [earningsApiError, setEarningsApiError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
       if (!id) return;
       try {
         const item = await fetchByTicker(id);
-        const { overviewJSON, newsJSON } = item;
+        const { overviewJSON, newsJSON, earningsJSON } = item;
         const { feed } = newsJSON;
         const limitedNewsFeed = feed.slice(0, 10);
         setNewsFeed(limitedNewsFeed);
         setOverviewData(overviewJSON);
         setNewsData(newsJSON);
+        setEarningsData(earningsJSON);
       } catch (error) {
         console.error("Error Fetching");
         setOverviewApiError(!overviewApiError);
-        setNewsApiError(!newsApiError);
+        setNewsDataApiError(!newsDataApiError);
+        setEarningsApiError(!earningsApiError);
       } finally {
         setLoading(false);
       }
@@ -45,6 +49,7 @@ export default function page() {
 
   //console.log(overviewData);
   //tickers not working: GSMGW
+  console.log(earningsData);
 
   return (
     <>
@@ -66,7 +71,7 @@ export default function page() {
         <div>There was an error with the API, please try another ticker.</div>
       )}
 
-      {!newsApiError ? (
+      {!newsDataApiError ? (
         <div>
           <div>
             {newsData.items === 0 ? (
@@ -83,7 +88,6 @@ export default function page() {
         <></>
       )}
 
-      {/* category_within_source, overall_sentiment_label  */}
       <div>
         {newsFeed !== null ? (
           newsFeed.map((article, index) => (
