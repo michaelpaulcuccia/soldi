@@ -11,23 +11,24 @@ export default function page() {
   const [newsData, setNewsData] = useState(null);
   const [newsFeed, setNewsFeed] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [overviewApiError, setOverviewApiError] = useState(false);
+  const [newsApiError, setNewsApiError] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       if (!id) return;
       try {
         const item = await fetchByTicker(id);
-        console.log(item);
         const { overviewJSON, newsJSON } = item;
-        //console.log(newsJSON);
         const { feed } = newsJSON;
         const limitedNewsFeed = feed.slice(0, 10);
-        //console.log(feed);
         setNewsFeed(limitedNewsFeed);
         setOverviewData(overviewJSON);
         setNewsData(newsJSON);
       } catch (error) {
         console.error("Error Fetching");
+        setOverviewApiError(!overviewApiError);
+        setNewsApiError(!newsApiError);
       } finally {
         setLoading(false);
       }
@@ -42,14 +43,12 @@ export default function page() {
     return <h1>Loading...</h1>;
   }
 
-  console.log(overviewData);
-  console.log(newsData);
+  //console.log(overviewData);
+  //tickers not working: GSMGW
 
   return (
     <>
-      {overviewData.Information ? (
-        <div>No data found using {id}.</div>
-      ) : (
+      {!overviewApiError ? (
         <div>
           <SymbolText>
             {overviewData.Symbol ? overviewData.Symbol : { id }}
@@ -63,10 +62,11 @@ export default function page() {
             {overviewData.Currency}
           </StockText>
         </div>
-      )}
-      {newsData.Information ? (
-        <div>No news found using {id}.</div>
       ) : (
+        <div>There was an error with the API, please try another ticker.</div>
+      )}
+
+      {!newsApiError ? (
         <div>
           <div>
             {newsData.items === 0 ? (
@@ -79,7 +79,10 @@ export default function page() {
             )}
           </div>
         </div>
+      ) : (
+        <></>
       )}
+
       {/* category_within_source, overall_sentiment_label  */}
       <div>
         {newsFeed !== null ? (
