@@ -24,7 +24,7 @@ export default function page() {
         const item = await fetchByTicker(id);
         const { overviewJSON, newsJSON, earningsJSON } = item;
         setOverviewData(overviewJSON);
-        //Shows in DOM if there are any news articles and if so, how many
+        //Shows in DOM if there are any news articles and if so, how many articles "Displaying NuM articles."
         setNewsData(newsJSON);
         const { feed } = newsJSON;
         //IF there are news articles
@@ -36,7 +36,7 @@ export default function page() {
       } catch (error) {
         console.error("Error Fetching");
         setOverviewApiError(!overviewApiError);
-        setNewsDataApiError(!newsDataApiError); //also handles newsFeed, setNewsFeed Errors
+        setNewsDataApiError(!newsDataApiError); //also handles newsFeed Errors
         setEarningsApiError(!earningsApiError);
       } finally {
         setLoading(false);
@@ -51,8 +51,6 @@ export default function page() {
   if (loading) {
     return <h1>Loading...</h1>;
   }
-
-  console.log(newsFeed);
 
   return (
     <>
@@ -74,15 +72,17 @@ export default function page() {
         <div>There was an error with the API, please try another ticker.</div>
       )}
 
-      {earningsData && <MyLineChart data={earningsData} />}
+      {earningsData && earningsData.length > 0 && (
+        <MyLineChart data={earningsData} />
+      )}
 
-      {!newsDataApiError || newsData !== null ? (
+      {newsFeed && newsFeed.length > 0 && !newsDataApiError ? (
         <div>Displaying {newsData.items} articles.</div>
       ) : (
         <div>No news articles were found</div>
       )}
 
-      {!newsDataApiError || newsFeed !== null ? (
+      {newsFeed && newsFeed.length > 0 && !newsDataApiError ? (
         <>
           {newsFeed.map((article, i) => (
             <div key={i} style={{ margin: "16px 0" }}>
