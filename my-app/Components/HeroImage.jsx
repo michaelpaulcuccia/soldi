@@ -10,7 +10,6 @@ const Root = styled.div`
   position: relative;
   width: 100%;
   height: 338px;
-  //background: url(${(props) => props.bgimage}) no-repeat center center;
   background: url(${(props) => props.$bgimage}) no-repeat center center;
   background-size: cover;
   display: flex;
@@ -90,7 +89,6 @@ const MobileHeroText = styled.div`
     font-size: 23px;
     line-height: 27px;
     letter-spacing: 0.5px;
-
     margin-top: 8px;
   }
 `;
@@ -107,6 +105,7 @@ export default function HeroImage({ bgimage, headline, subtext }) {
       <MobileHeroText className={anton.className}>
         <span>{headline}</span>
         <p>{subtext}</p>
+        <br />
       </MobileHeroText>
     </>
   );

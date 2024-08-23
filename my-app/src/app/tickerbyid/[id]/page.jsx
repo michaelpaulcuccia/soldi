@@ -79,7 +79,7 @@ export default function page() {
       {newsFeed && newsFeed.length > 0 && !newsDataApiError ? (
         <div>Displaying {newsData.items} articles.</div>
       ) : (
-        <div>No news articles were found</div>
+        <h2 style={{ marginBottom: "48px" }}>No news articles were found</h2>
       )}
 
       {newsFeed && newsFeed.length > 0 && !newsDataApiError ? (
