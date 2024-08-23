@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-//import { mobileBreakpoint } from "../constants";
 import { Fira_Code } from "next/font/google";
+import { mobileBreakpoint } from "../../constants";
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
@@ -16,6 +16,12 @@ const StyledSymbolText = styled.h2`
   letter-spacing: 1.5px;
   margin: 16px 0 8px 0;
   color: #444444;
+  text-align: center;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    font-size: 46px;
+    line-height: 46px;
+  }
 `;
 
 export function SymbolText({ children }) {
@@ -28,14 +34,18 @@ export function SymbolText({ children }) {
 
 const StyledStockText = styled.p`
   font-weight: bold;
-  font-size: 18px;
-  line-height: 18px;
+  font-size: 22px;
+  line-height: 24px;
   margin: 16px 0;
   color: #444444;
+  text-align: center;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    font-size: 16px;
+    line-height: 18px;
+  }
 `;
 
 export function StockText({ children }) {
-  return (
-    <StyledStockText className={firaCode.className}>{children}</StyledStockText>
-  );
+  return <StyledStockText>{children}</StyledStockText>;
 }
