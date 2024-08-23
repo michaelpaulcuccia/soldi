@@ -14,7 +14,7 @@ export default function page() {
   const [newsDataApiError, setNewsDataApiError] = useState(false);
   const [newsFeed, setNewsFeed] = useState(null);
   const [earningsData, setEarningsData] = useState(null);
-  const [earningsApiError, setEarningsApiError] = useState(false);
+  const [earningsApiError, setEarningsApiError] = useState(true);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,17 +23,20 @@ export default function page() {
       try {
         const item = await fetchByTicker(id);
         const { overviewJSON, newsJSON, earningsJSON } = item;
-        const { feed } = newsJSON;
-        const limitedNewsFeed = feed.slice(0, 10);
-        setNewsFeed(limitedNewsFeed);
         setOverviewData(overviewJSON);
+        //Shows in DOM if there are any news articles and if so, how many
         setNewsData(newsJSON);
+        const { feed } = newsJSON;
+        //IF there are news articles
+        if (feed) {
+          setNewsFeed(feed);
+        }
         const { annualEarnings } = earningsJSON;
         setEarningsData(annualEarnings);
       } catch (error) {
         console.error("Error Fetching");
         setOverviewApiError(!overviewApiError);
-        setNewsDataApiError(!newsDataApiError);
+        setNewsDataApiError(!newsDataApiError); //also handles newsFeed, setNewsFeed Errors
         setEarningsApiError(!earningsApiError);
       } finally {
         setLoading(false);
@@ -49,9 +52,7 @@ export default function page() {
     return <h1>Loading...</h1>;
   }
 
-  //console.log(overviewData);
-  //tickers not working: GSMGW
-  console.log(earningsData);
+  console.log(newsFeed);
 
   return (
     <>
@@ -73,27 +74,18 @@ export default function page() {
         <div>There was an error with the API, please try another ticker.</div>
       )}
 
-      {!newsDataApiError ? (
-        <div>
-          <div>
-            {newsData.items === 0 ? (
-              <span>No articles found</span>
-            ) : (
-              <span>
-                {newsFeed === null ? "Displaying first 10 of" : ""}{" "}
-                {newsData.items} articles found
-              </span>
-            )}
-          </div>
-        </div>
+      {earningsData && <MyLineChart data={earningsData} />}
+
+      {!newsDataApiError || newsData !== null ? (
+        <div>Displaying {newsData.items} articles.</div>
       ) : (
-        <></>
+        <div>No news articles were found</div>
       )}
 
-      <div>
-        {newsFeed !== null ? (
-          newsFeed.map((article, index) => (
-            <div key={index} style={{ margin: "16px 0" }}>
+      {!newsDataApiError || newsFeed !== null ? (
+        <>
+          {newsFeed.map((article, i) => (
+            <div key={i} style={{ margin: "16px 0" }}>
               <Link
                 href={article.url}
                 target="_blank"
@@ -102,13 +94,11 @@ export default function page() {
                 {article.title}
               </Link>
             </div>
-          ))
-        ) : (
-          <div>No news articles found</div>
-        )}
-      </div>
-
-      <MyLineChart data={earningsData} />
+          ))}
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 }
