@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
             <MainNav />
           </Container>
           {showHero && (
-            <FullBleedContainer bg="dark" bgShouldChangeMobile="yes">
+            <FullBleedContainer bg="dark" bgshouldchangemobile="yes">
               <HeroImage
                 bgimage="/images/hero-finance-1.jpg"
                 headline="Stay Ahead with Real-Time Market Insights"

@@ -4,25 +4,23 @@ import styled from "styled-components";
 import Container from "@mui/material/Container";
 import { mobileBreakpoint } from "../constants";
 
-// Styled component with destructured props
 const Root = styled.div`
   width: 100vw;
-  background-color: ${({ bg }) => (bg === "dark" ? "black" : "white")};
+  background-color: ${({ $bg }) => ($bg === "dark" ? "black" : "white")};
 
   @media (max-width: ${mobileBreakpoint}) {
-    background-color: ${({ bgShouldChangeMobile }) =>
-      bgShouldChangeMobile === "yes" ? "white" : "black"};
+    background-color: ${({ $bgshouldchangemobile }) =>
+      $bgshouldchangemobile === "yes" ? "white" : "black"};
   }
 `;
 
 export default function FullBleedContainer({
   children,
   bg,
-  bgShouldChangeMobile,
+  bgshouldchangemobile,
 }) {
   return (
-    <Root bg={bg} bgShouldChangeMobile={bgShouldChangeMobile}>
-      {" "}
+    <Root $bg={bg} $bgshouldchangemobile={bgshouldchangemobile}>
       <Container maxWidth="xl">{children}</Container>
     </Root>
   );
