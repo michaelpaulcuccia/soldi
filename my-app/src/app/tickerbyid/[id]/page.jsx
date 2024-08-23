@@ -34,10 +34,10 @@ export default function page() {
         const { annualEarnings } = earningsJSON;
         setEarningsData(annualEarnings);
       } catch (error) {
-        console.error("Error Fetching");
         setOverviewApiError(!overviewApiError);
         setNewsDataApiError(!newsDataApiError); //also handles newsFeed Errors
         setEarningsApiError(!earningsApiError);
+        console.error("Error Fetching: " + error);
       } finally {
         setLoading(false);
       }
