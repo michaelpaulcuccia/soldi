@@ -1,10 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import { fetchByTicker } from "../../../../utils";
-import { SymbolText, StockText } from "../../../../Components/TickerByIDText";
+import {
+  SymbolText,
+  StockText,
+  SentimentContainer,
+} from "../../../../Components/TickerByID";
 import MyLineChart from "../../../../Components/MyLineChart";
 
 export default function page() {
@@ -85,6 +88,7 @@ export default function page() {
 
       {newsFeed && newsFeed.length > 0 && !newsDataApiError ? (
         <>
+          <SentimentContainer />
           {newsFeed.map((article, i) => (
             <div key={i} style={{ margin: "16px 0" }}>
               <Link
@@ -100,12 +104,6 @@ export default function page() {
       ) : (
         <></>
       )}
-
-      <Image src="/images/bear.svg" height={40} width={40} alt="" />
-      <Image src="/images/bull.svg" height={40} width={40} alt="" />
-      <Image src="/images/neutral.svg" height={40} width={40} alt="" />
-      <Image src="/images/plus.svg" height={40} width={40} alt="" />
-      <Image src="/images/minus.svg" height={40} width={40} alt="" />
     </>
   );
 }
