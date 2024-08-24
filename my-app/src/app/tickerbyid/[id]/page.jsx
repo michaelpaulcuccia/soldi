@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { fetchByTicker } from "../../../../utils";
 import { SymbolText, StockText } from "../../../../Components/TickerByIDText";
@@ -99,6 +100,12 @@ export default function page() {
       ) : (
         <></>
       )}
+
+      <Image src="/images/bear.svg" height={40} width={40} alt="" />
+      <Image src="/images/bull.svg" height={40} width={40} alt="" />
+      <Image src="/images/neutral.svg" height={40} width={40} alt="" />
+      <Image src="/images/plus.svg" height={40} width={40} alt="" />
+      <Image src="/images/minus.svg" height={40} width={40} alt="" />
     </>
   );
 }

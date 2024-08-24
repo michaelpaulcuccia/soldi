@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-//import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import { Alumni_Sans } from "next/font/google";
 import PerformersTable from "../../Components/PerformersTable";
