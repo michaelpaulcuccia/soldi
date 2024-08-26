@@ -47,37 +47,37 @@ export const sentimentHandler = (arg) => {
   switch (arg) {
     case "Somewhat-Bullish":
       return (
-        <>
+        <div>
           <Image src="/images/bull.svg" height={20} width={20} alt="" />
           <Image src="/images/plusminus.svg" height={20} width={20} alt="" />
-        </>
+        </div>
       );
     case "Bullish":
       return (
-        <>
+        <div>
           <Image src="/images/bull.svg" height={20} width={20} alt="" />
-        </>
+        </div>
       );
     case "Somewhat-Bearish":
       return (
-        <>
+        <div>
           <Image src="/images/bear.svg" height={20} width={20} alt="" />
           <Image src="/images/plusminus.svg" height={20} width={20} alt="" />
-        </>
+        </div>
       );
     case "Bearish":
       return (
-        <>
+        <div>
           <Image src="/images/bear.svg" height={20} width={20} alt="" />
-        </>
+        </div>
       );
     case "Neutral":
       return (
-        <>
+        <div>
           <Image src="/images/neutral.svg" height={20} width={20} alt="" />
-        </>
+        </div>
       );
     default:
-      return <>No sentiment.</>;
+      return <div>No sentiment.</div>;
   }
 };

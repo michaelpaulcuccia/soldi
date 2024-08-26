@@ -118,3 +118,25 @@ export function SentimentContainer() {
     </>
   );
 }
+
+const StyledLinkAndSentiment = styled.div`
+  display: flex;
+  grid-gap: 14px;
+  margin: 16px 0px;
+  border-radius: 3px;
+  text-decoration: underline;
+  color: blue;
+  padding: 3px 0;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #dcdcdc;
+  }
+
+  @media (max-width: ${mobileBreakpoint}) {
+  }
+`;
+
+export function LinkAndSentiment({ children }) {
+  return <StyledLinkAndSentiment>{children}</StyledLinkAndSentiment>;
+}

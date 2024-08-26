@@ -7,6 +7,7 @@ import {
   SymbolText,
   StockText,
   SentimentContainer,
+  LinkAndSentiment,
 } from "../../../../Components/TickerByID";
 import MyLineChart from "../../../../Components/MyLineChart";
 
@@ -94,7 +95,7 @@ export default function page() {
         <>
           <SentimentContainer />
           {newsFeed.map((article, i) => (
-            <div key={i} style={{ margin: "16px 0" }}>
+            <LinkAndSentiment key={i}>
               <Link
                 href={article.url}
                 target="_blank"
@@ -102,9 +103,8 @@ export default function page() {
               >
                 {article.title}
               </Link>
-              {/* {<div>{article.overall_sentiment_label}</div>} */}
               {sentimentHandler(article.overall_sentiment_label)}
-            </div>
+            </LinkAndSentiment>
           ))}
         </>
       ) : (
