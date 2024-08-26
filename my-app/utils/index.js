@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export async function fetchByTicker(id) {
   try {
     const overviewRes = await fetch(
@@ -40,3 +42,42 @@ export async function fetchByTicker(id) {
     return null;
   }
 }
+
+export const sentimentHandler = (arg) => {
+  switch (arg) {
+    case "Somewhat-Bullish":
+      return (
+        <>
+          <Image src="/images/bull.svg" height={20} width={20} alt="" />
+          <Image src="/images/plusminus.svg" height={20} width={20} alt="" />
+        </>
+      );
+    case "Bullish":
+      return (
+        <>
+          <Image src="/images/bull.svg" height={20} width={20} alt="" />
+        </>
+      );
+    case "Somewhat-Bearish":
+      return (
+        <>
+          <Image src="/images/bear.svg" height={20} width={20} alt="" />
+          <Image src="/images/plusminus.svg" height={20} width={20} alt="" />
+        </>
+      );
+    case "Bearish":
+      return (
+        <>
+          <Image src="/images/bear.svg" height={20} width={20} alt="" />
+        </>
+      );
+    case "Neutral":
+      return (
+        <>
+          <Image src="/images/neutral.svg" height={20} width={20} alt="" />
+        </>
+      );
+    default:
+      return <>No sentiment.</>;
+  }
+};

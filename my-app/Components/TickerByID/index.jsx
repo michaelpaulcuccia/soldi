@@ -60,9 +60,19 @@ const StyledSentimentContainer = styled.div`
     align-items: center;
   }
 
+  h3 {
+    @media (max-width: ${mobileBreakpoint}) {
+      margin-bottom: 12px;
+    }
+  }
+
   div {
     display: flex;
     align-items: center;
+
+    @media (max-width: ${mobileBreakpoint}) {
+      margin-bottom: 6px;
+    }
 
     p {
       margin-right: 6px;
@@ -75,6 +85,10 @@ export function SentimentContainer() {
   return (
     <>
       <StyledSentimentContainer>
+        <h3>
+          <strong>Sentiment Key:</strong>
+        </h3>
+
         <div>
           <p>Somewhat-Bullish</p>
 

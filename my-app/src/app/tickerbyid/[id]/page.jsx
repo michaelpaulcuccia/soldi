@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { fetchByTicker } from "../../../../utils";
+import { fetchByTicker, sentimentHandler } from "../../../../utils";
 import {
   SymbolText,
   StockText,
@@ -56,6 +56,8 @@ export default function page() {
     return <h1>Loading...</h1>;
   }
 
+  console.log(newsFeed);
+
   return (
     <>
       {!overviewApiError ? (
@@ -81,7 +83,9 @@ export default function page() {
       )}
 
       {newsFeed && newsFeed.length > 0 && !newsDataApiError ? (
-        <div>Displaying {newsData.items} articles.</div>
+        <h2 style={{ marginBottom: "32px" }}>
+          Displaying {newsData.items} articles.
+        </h2>
       ) : (
         <h2 style={{ marginBottom: "48px" }}>No news articles were found</h2>
       )}
@@ -98,6 +102,8 @@ export default function page() {
               >
                 {article.title}
               </Link>
+              {/* {<div>{article.overall_sentiment_label}</div>} */}
+              {sentimentHandler(article.overall_sentiment_label)}
             </div>
           ))}
         </>
