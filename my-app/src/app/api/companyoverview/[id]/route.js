@@ -1,7 +1,17 @@
 export const GET = async (request, { params }) => {
+  //remove any "+" characters
+  function removePlusCharacter(str) {
+    if (str.includes("+")) {
+      return str.replace(/\+/g, "");
+    }
+    return str;
+  }
+
+  const cleanedString = removePlusCharacter(params.id);
+
   try {
     const response = await fetch(
-      `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${params.id}&apikey=${process.env.MY_API_KEY}`
+      `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${cleanedString}&apikey=${process.env.MY_API_KEY}`
     );
     const data = await response.json();
     return new Response(JSON.stringify(data));
