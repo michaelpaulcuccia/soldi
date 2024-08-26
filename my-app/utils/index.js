@@ -43,11 +43,12 @@ export async function fetchByTicker(id) {
   }
 }
 
+//sets style on two images to prevent column stacking when page shrinks
 export const sentimentHandler = (arg) => {
   switch (arg) {
     case "Somewhat-Bullish":
       return (
-        <div>
+        <div style={{ minWidth: "40px" }}>
           <Image src="/images/bull.svg" height={20} width={20} alt="" />
           <Image src="/images/plusminus.svg" height={20} width={20} alt="" />
         </div>
@@ -60,7 +61,7 @@ export const sentimentHandler = (arg) => {
       );
     case "Somewhat-Bearish":
       return (
-        <div>
+        <div style={{ minWidth: "40px" }}>
           <Image src="/images/bear.svg" height={20} width={20} alt="" />
           <Image src="/images/plusminus.svg" height={20} width={20} alt="" />
         </div>
@@ -81,3 +82,14 @@ export const sentimentHandler = (arg) => {
       return <div>No sentiment.</div>;
   }
 };
+
+export function formatFiscalDates(dataArray) {
+  return dataArray.map((item) => {
+    const date = new Date(item.fiscalDateEnding);
+    return new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(date);
+  });
+}

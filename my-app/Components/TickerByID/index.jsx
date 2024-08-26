@@ -54,6 +54,7 @@ export function StockText({ children }) {
 const StyledSentimentContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 32px;
 
   @media (max-width: ${mobileBreakpoint}) {
     flex-direction: column;
@@ -68,7 +69,6 @@ const StyledSentimentContainer = styled.div`
 
   div {
     display: flex;
-    align-items: center;
 
     @media (max-width: ${mobileBreakpoint}) {
       margin-bottom: 6px;
@@ -129,14 +129,55 @@ const StyledLinkAndSentiment = styled.div`
   padding: 3px 0;
   transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: #dcdcdc;
+  img {
+    flex-shrink: 0;
   }
 
-  @media (max-width: ${mobileBreakpoint}) {
+  &:hover {
+    background-color: #dcdcdc;
   }
 `;
 
 export function LinkAndSentiment({ children }) {
   return <StyledLinkAndSentiment>{children}</StyledLinkAndSentiment>;
+}
+
+const StyledDisplayArticlesText = styled.h2`
+  margin-bottom: 32px;
+  @media (max-width: ${mobileBreakpoint}) {
+    text-align: center;
+  }
+`;
+
+export function DisplayArticlesText({ children }) {
+  return <StyledDisplayArticlesText>{children}</StyledDisplayArticlesText>;
+}
+
+const StyledEarningsDateDisplay = styled.div`
+  display: flex;
+  margin-bottom: 32px;
+  font-size: 14px;
+
+  .description {
+    font-weight: bold;
+  }
+
+  span {
+    padding-right: 4px;
+
+    @media (max-width: ${mobileBreakpoint}) {
+      margin-bottom: 2px;
+      padding-right: 2px;
+    }
+  }
+
+  @media (max-width: ${mobileBreakpoint}) {
+    flex-wrap: wrap;
+    font-size: 12px;
+    margin-bottom: 18px;
+  }
+`;
+
+export function EarningsDateDisplay({ children }) {
+  return <StyledEarningsDateDisplay>{children}</StyledEarningsDateDisplay>;
 }

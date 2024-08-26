@@ -2,12 +2,18 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { fetchByTicker, sentimentHandler } from "../../../../utils";
+import {
+  fetchByTicker,
+  sentimentHandler,
+  formatFiscalDates,
+} from "../../../../utils";
 import {
   SymbolText,
   StockText,
   SentimentContainer,
   LinkAndSentiment,
+  DisplayArticlesText,
+  EarningsDateDisplay,
 } from "../../../../Components/TickerByID";
 import MyLineChart from "../../../../Components/MyLineChart";
 
@@ -19,6 +25,7 @@ export default function page() {
   const [newsDataApiError, setNewsDataApiError] = useState(false);
   const [newsFeed, setNewsFeed] = useState(null);
   const [earningsData, setEarningsData] = useState(null);
+  const [earningsDatesDisplay, setEarningsDatesDisplay] = useState(null);
   const [earningsApiError, setEarningsApiError] = useState(true);
   const [loading, setLoading] = useState(true);
 
@@ -38,6 +45,10 @@ export default function page() {
         }
         const { annualEarnings } = earningsJSON;
         setEarningsData(annualEarnings);
+
+        const formattedEarningDates = formatFiscalDates(annualEarnings);
+        const reversedFormattedEarningDates = formattedEarningDates.reverse();
+        setEarningsDatesDisplay(reversedFormattedEarningDates);
       } catch (error) {
         setOverviewApiError(!overviewApiError);
         setNewsDataApiError(!newsDataApiError); //also handles newsFeed Errors
@@ -57,7 +68,7 @@ export default function page() {
     return <h1>Loading...</h1>;
   }
 
-  console.log(newsFeed);
+  console.log(earningsData);
 
   return (
     <>
@@ -79,16 +90,31 @@ export default function page() {
         <div>There was an error with the API, please try another ticker.</div>
       )}
 
-      {earningsData && earningsData.length > 0 && (
-        <MyLineChart data={earningsData} />
+      {/* // TO DO: display all the dates shared  */}
+
+      {earningsData && earningsData.length > 0 ? (
+        <>
+          <MyLineChart data={earningsData} />
+          <EarningsDateDisplay>
+            <span className="description">Fiscal Date Ending:</span>
+            {earningsDatesDisplay.map((item, i) => (
+              <span key={i}>
+                {item}
+                {i < earningsDatesDisplay.length - 1 && ", "}{" "}
+              </span>
+            ))}
+          </EarningsDateDisplay>
+        </>
+      ) : (
+        <DisplayArticlesText>No Earnings Data Found</DisplayArticlesText>
       )}
 
       {newsFeed && newsFeed.length > 0 && !newsDataApiError ? (
-        <h2 style={{ marginBottom: "32px" }}>
+        <DisplayArticlesText>
           Displaying {newsData.items} articles.
-        </h2>
+        </DisplayArticlesText>
       ) : (
-        <h2 style={{ marginBottom: "48px" }}>No news articles were found</h2>
+        <DisplayArticlesText>No News Articles Found</DisplayArticlesText>
       )}
 
       {newsFeed && newsFeed.length > 0 && !newsDataApiError ? (

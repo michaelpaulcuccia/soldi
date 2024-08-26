@@ -77,6 +77,7 @@ const MobileHeroText = styled.div`
     text-align: left;
     margin: 22px 0;
     color: rgb(35, 35, 35);
+    text-align: center;
   }
 
   span {
