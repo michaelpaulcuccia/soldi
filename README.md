@@ -2,8 +2,6 @@
 
 ## DESCRIPTION
 
-I built this project following an unsuccessful 2nd interview with a FinTech company. 👎
-
 The homepage features three tables showing Top Gainers, Top Loser, and Most Actively Traded Tickers on the US Market. If you click on a Ticker's name, it would then take you a page that will provide additional information (if available) about the company and stock to include:
 
 - Company Name and Address
@@ -22,7 +20,7 @@ A huge thank you to https://www.alphavantage.co/. Without their free API and exc
 
 ## GOALS
 
-While I was disappointed about the job, I wouldn't call this a "revenge" project as much as I wanted to prove to myself that I was capable of working with finance data. I actually met with a friend who has worked for over 20 years in the finance industry to help understand the many fields and items that the API was providing.
+I wanted to experiment working with finance data. I actually met with a friend who has worked for over 20 years in the finance industry to help understand the many fields and items that the API was providing.
 
 All in all, I just want an opportunity to demonstrate my skills, dedication, and willingness to try new things.
 
